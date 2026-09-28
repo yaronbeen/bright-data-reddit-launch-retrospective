@@ -1,0 +1,62 @@
+{
+  "post_count": 3,
+  "venues": {
+    "r/indiehackers": {
+      "post_count": 1,
+      "observed_comments": 14,
+      "observed_upvotes": 42,
+      "formats": {
+        "show-and-tell": 1
+      },
+      "reply_themes": {
+        "pricing": 1,
+        "onboarding": 1
+      }
+    },
+    "r/saas": {
+      "post_count": 1,
+      "observed_comments": 8,
+      "observed_upvotes": 25,
+      "formats": {
+        "question-led": 1
+      },
+      "reply_themes": {
+        "integrations": 1
+      }
+    },
+    "r/startups": {
+      "post_count": 1,
+      "observed_comments": 5,
+      "observed_upvotes": 19,
+      "formats": {
+        "show-and-tell": 1
+      },
+      "reply_themes": {
+        "pricing": 1
+      }
+    }
+  },
+  "evidence": [
+    {
+      "url": "https://www.reddit.com/r/indiehackers/comments/a1/launch/",
+      "subreddit": "r/indiehackers",
+      "format": "show-and-tell"
+    },
+    {
+      "url": "https://www.reddit.com/r/saas/comments/b2/launch/",
+      "subreddit": "r/saas",
+      "format": "question-led"
+    },
+    {
+      "url": "https://www.reddit.com/r/startups/comments/c3/launch/",
+      "subreddit": "r/startups",
+      "format": "show-and-tell"
+    }
+  ],
+  "recommendation": "Repeat venues/formats with useful observed replies; adjust the next test based on the linked themes.",
+  "limits": [
+    "Observed engagement is descriptive, not causal or attributable to venue/format.",
+    "Cohort is user-curated and not comparable unless collection windows and selection rules match.",
+    "No general market demand or prospect inference."
+  ]
+}
