@@ -81,3 +81,8 @@ def test_live_dry_run_needs_no_key_and_makes_no_request(monkeypatch,capsys):
     monkeypatch.setattr(tool.urllib.request,"urlopen",lambda *a,**k:(_ for _ in ()).throw(AssertionError("network called")))
     assert tool.main(["launch_cohort.json","--live","--dry-run"])==0
     assert json.loads(capsys.readouterr().out)["live_calls"]==0
+
+def test_post_url_validator_requires_reddit_post_path():
+    assert tool.valid_post_url("https://www.reddit.com/r/saas/comments/abc123/launch/")
+    assert not tool.valid_post_url("https://www.reddit.com/r/saas/comments/not-a-post-id/")
+    assert not tool.valid_post_url("https://www.reddit.com/comments/abc123/")

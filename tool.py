@@ -1,5 +1,5 @@
 """Summarize a founder's own curated public Reddit launch cohort."""
-import argparse, json, os, sys, urllib.error, urllib.parse, urllib.request
+import argparse, json, os, re, sys, urllib.error, urllib.parse, urllib.request
 SAMPLE=[{"url":"https://www.reddit.com/r/indiehackers/comments/a1/launch/","subreddit":"r/indiehackers","format":"show-and-tell","num_upvotes":42,"num_comments":14,"reply_themes":["pricing","onboarding"]},{"url":"https://www.reddit.com/r/saas/comments/b2/launch/","subreddit":"r/saas","format":"question-led","num_upvotes":25,"num_comments":8,"reply_themes":["integrations"]},{"url":"https://www.reddit.com/r/startups/comments/c3/launch/","subreddit":"r/startups","format":"show-and-tell","num_upvotes":19,"num_comments":5,"reply_themes":["pricing"]}]
 def collect_posts(urls, key):
     if not 1 <= len(urls) <= 20: raise ValueError("Post collection accepts 1-20 post URLs per sync request")
@@ -22,9 +22,10 @@ class BrightDataError(Exception):
 def valid_post_url(url):
     try: parts=urllib.parse.urlsplit(url)
     except (TypeError,ValueError): return False
-    return parts.scheme=="https" and parts.hostname=="www.reddit.com" and "/comments/" in parts.path and not parts.username and not parts.password
+    return parts.scheme=="https" and parts.netloc=="www.reddit.com" and bool(re.fullmatch(r"/r/[A-Za-z0-9_]+/comments/[A-Za-z0-9]+(?:/[^/]+)?/?",parts.path))
 
 def build_report(requested_urls, records, curated_records=None):
+    if any(not valid_post_url(url) for url in requested_urls): raise ValueError("Every requested URL must be a canonical Reddit post URL")
     curated_records=curated_records or {}
     requested=set(requested_urls); found={}
     for record in records:
@@ -66,7 +67,8 @@ def main(argv=None):
         else: p.error("Supply curated launch cohort JSON or use --sample")
         if not isinstance(data,list) or any(not isinstance(r,dict) or not isinstance(r.get("url"),str) for r in data): raise ValueError("Input must be an array of records with URL fields")
         urls=[r["url"] for r in data]
-        if a.live and (not 1<=len(urls)<=20 or len(set(urls))!=len(urls) or any(not valid_post_url(u) for u in urls)): raise ValueError("Live mode requires 1-20 unique canonical public Reddit post URLs")
+        if any(not valid_post_url(u) for u in urls): raise ValueError("Input requires canonical public Reddit post URLs")
+        if a.live and (not 1<=len(urls)<=20 or len(set(urls))!=len(urls)): raise ValueError("Live mode requires 1-20 unique canonical public Reddit post URLs")
         if a.dry_run: print(json.dumps({"posts":len(data),"live_calls":0,"dataset_id":"gd_lvz8ah06191smkebj4" if a.live else None})); return 0
         if a.live:
             key=os.environ.get("BRIGHT_DATA_API_KEY")
