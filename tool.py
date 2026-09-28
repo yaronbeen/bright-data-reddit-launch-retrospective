@@ -20,9 +20,11 @@ class BrightDataError(Exception):
     def __init__(self,code,message): self.code=code; super().__init__(message)
 
 def valid_post_url(url):
+    if not isinstance(url,str) or "?" in url or "#" in url: return False
     try: parts=urllib.parse.urlsplit(url)
     except (TypeError,ValueError): return False
-    return parts.scheme=="https" and parts.netloc=="www.reddit.com" and bool(re.fullmatch(r"/r/[A-Za-z0-9_]+/comments/[A-Za-z0-9]+(?:/[^/]+)?/?",parts.path))
+    match=re.fullmatch(r"/r/[A-Za-z0-9_]+/comments/[A-Za-z0-9]+/((?:[A-Za-z0-9._~-]|%[0-9A-Fa-f]{2})+)/?",parts.path)
+    return parts.scheme=="https" and parts.netloc=="www.reddit.com" and bool(match) and match.group(1) not in (".","..")
 
 def build_report(requested_urls, records, curated_records=None):
     if any(not valid_post_url(url) for url in requested_urls): raise ValueError("Every requested URL must be a canonical Reddit post URL")

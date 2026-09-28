@@ -4,7 +4,7 @@ Compare a founder's own user-curated cohort of public launch-post URLs across ch
 
 ## Who, why, decision
 
-For founders and launch marketers reviewing posts they authored. Provide a JSON cohort with each canonical `https://www.reddit.com/r/<subreddit>/comments/<post-id>` post URL, subreddit, format, observed counters, and optional manually curated reply themes. URLs are validated against the exact Reddit hostname and post path in offline and live modes. The tool helps decide what to repeat, change, or avoid in a next test. It does not search for market demand, identify prospects, or claim that venue or format caused engagement.
+For founders and launch marketers reviewing posts they authored. Provide a JSON cohort with each canonical `https://www.reddit.com/r/<subreddit>/comments/<post-id>/<slug>` post URL, subreddit, format, observed counters, and optional manually curated reply themes. The exact host, valid subreddit and alphanumeric post ID, and nonempty URL-safe title slug are required; credentials, ports, query strings, and fragments are rejected in offline and live modes. The tool helps decide what to repeat, change, or avoid in a next test. It does not search for market demand, identify prospects, or claim that venue or format caused engagement.
 
 ## Workflow and synthetic example -> decision
 

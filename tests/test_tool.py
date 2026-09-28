@@ -90,6 +90,20 @@ def test_live_dry_run_needs_no_key_and_makes_no_request(monkeypatch,capsys):
     assert json.loads(capsys.readouterr().out)["live_calls"]==0
 
 def test_post_url_validator_requires_reddit_post_path():
-    assert tool.valid_post_url("https://www.reddit.com/r/saas/comments/abc123/launch/")
-    assert not tool.valid_post_url("https://www.reddit.com/r/saas/comments/not-a-post-id/")
-    assert not tool.valid_post_url("https://www.reddit.com/comments/abc123/")
+    valid=("https://www.reddit.com/r/saas/comments/abc123/launch/","https://www.reddit.com/r/saas/comments/1/launch","https://www.reddit.com/r/saas/comments/abc123/title%20slug/")
+    invalid=(
+        "https://www.reddit.com.evil.example/r/saas/comments/abc123/launch/",
+        "https://"+"user"+":"+"pass"+"@www.reddit.com/r/saas/comments/abc123/launch/",
+        "https://www.reddit.com/r/saas/comments/abc123/launch/:443",
+        "https://www.reddit.com/comments/abc123/launch/",
+        "https://www.reddit.com/r/saas/comments/not-a-post-id/launch/",
+        "https://www.reddit.com/r/saas/comments/abc123/",
+        "https://www.reddit.com/r/saas/comments/abc123//",
+        "https://www.reddit.com/r/saas/comments/abc123/invalid slug/",
+        "https://www.reddit.com/r/saas/comments/abc123/launch/?source=share",
+        "https://www.reddit.com/r/saas/comments/abc123/launch/#comment",
+        "https://www.reddit.com/r/saas/comments/abc123/launch/extra/path/",
+        "https://www.reddit.com:443/r/saas/comments/abc123/launch/",
+    )
+    assert all(tool.valid_post_url(url) for url in valid)
+    assert all(not tool.valid_post_url(url) for url in invalid)
