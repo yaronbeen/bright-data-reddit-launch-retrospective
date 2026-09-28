@@ -18,7 +18,14 @@ python3 tool.py launch_cohort.json retrospective.json
 python3 -m pytest -q
 ```
 
-Input is JSON. Keep the cohort limited to posts you own/are authorized to review. Live collection is not implemented in this CLI; this avoids accidental collection of unrelated posts. Current [Bright Data Reddit docs](https://docs.brightdata.com/products/scrapers/reddit/introduction) distinguish collect-by-URL from discovery and document separate Posts and Comments datasets. Any separately run live collection is opt-in, bounded, and potentially billable; check [current pricing](https://brightdata.com/pricing/web-scraper).
+Input is JSON. Keep the cohort limited to posts you own/are authorized to review. Live collection is explicitly opt-in and limited to 20 supplied URLs per synchronous request:
+
+```bash
+python3 tool.py launch_cohort.json retrospective.json --live --dry-run
+BRIGHT_DATA_API_KEY="your-key" python3 tool.py launch_cohort.json retrospective.json --live
+```
+
+Current [Bright Data Reddit docs](https://docs.brightdata.com/products/scrapers/reddit/introduction) document Posts dataset `gd_lvz8ah06191smkebj4`, collect-by-URL, sync requests up to 20 URLs, and pay-per-successful-record pricing. If Bright Data returns `202`, the tool reports the snapshot response instead of treating it as records. No live request runs in tests or CI; check [current pricing](https://brightdata.com/pricing/web-scraper) first.
 
 ## Outputs and limitations
 
