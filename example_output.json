@@ -1,5 +1,59 @@
 {
   "post_count": 3,
+  "posts": [
+    {
+      "url": "https://www.reddit.com/r/indiehackers/comments/a1/launch/",
+      "subreddit": "r/indiehackers",
+      "format": "show-and-tell",
+      "reply_themes": [
+        "pricing",
+        "onboarding"
+      ],
+      "num_comments": 14,
+      "num_upvotes": 42,
+      "provenance": {
+        "subreddit": "curated",
+        "format": "curated",
+        "reply_themes": "curated",
+        "num_comments": "curated",
+        "num_upvotes": "curated"
+      }
+    },
+    {
+      "url": "https://www.reddit.com/r/saas/comments/b2/launch/",
+      "subreddit": "r/saas",
+      "format": "question-led",
+      "reply_themes": [
+        "integrations"
+      ],
+      "num_comments": 8,
+      "num_upvotes": 25,
+      "provenance": {
+        "subreddit": "curated",
+        "format": "curated",
+        "reply_themes": "curated",
+        "num_comments": "curated",
+        "num_upvotes": "curated"
+      }
+    },
+    {
+      "url": "https://www.reddit.com/r/startups/comments/c3/launch/",
+      "subreddit": "r/startups",
+      "format": "show-and-tell",
+      "reply_themes": [
+        "pricing"
+      ],
+      "num_comments": 5,
+      "num_upvotes": 19,
+      "provenance": {
+        "subreddit": "curated",
+        "format": "curated",
+        "reply_themes": "curated",
+        "num_comments": "curated",
+        "num_upvotes": "curated"
+      }
+    }
+  ],
   "venues": {
     "r/indiehackers": {
       "post_count": 1,
@@ -40,17 +94,38 @@
     {
       "url": "https://www.reddit.com/r/indiehackers/comments/a1/launch/",
       "subreddit": "r/indiehackers",
-      "format": "show-and-tell"
+      "format": "show-and-tell",
+      "provenance": {
+        "subreddit": "curated",
+        "format": "curated",
+        "reply_themes": "curated",
+        "num_comments": "curated",
+        "num_upvotes": "curated"
+      }
     },
     {
       "url": "https://www.reddit.com/r/saas/comments/b2/launch/",
       "subreddit": "r/saas",
-      "format": "question-led"
+      "format": "question-led",
+      "provenance": {
+        "subreddit": "curated",
+        "format": "curated",
+        "reply_themes": "curated",
+        "num_comments": "curated",
+        "num_upvotes": "curated"
+      }
     },
     {
       "url": "https://www.reddit.com/r/startups/comments/c3/launch/",
       "subreddit": "r/startups",
-      "format": "show-and-tell"
+      "format": "show-and-tell",
+      "provenance": {
+        "subreddit": "curated",
+        "format": "curated",
+        "reply_themes": "curated",
+        "num_comments": "curated",
+        "num_upvotes": "curated"
+      }
     }
   ],
   "recommendation": "Repeat venues/formats with useful observed replies; adjust the next test based on the linked themes.",
@@ -58,5 +133,12 @@
     "Observed engagement is descriptive, not causal or attributable to venue/format.",
     "Cohort is user-curated and not comparable unless collection windows and selection rules match.",
     "No general market demand or prospect inference."
-  ]
+  ],
+  "requested_urls": [
+    "https://www.reddit.com/r/indiehackers/comments/a1/launch/",
+    "https://www.reddit.com/r/saas/comments/b2/launch/",
+    "https://www.reddit.com/r/startups/comments/c3/launch/"
+  ],
+  "missing_urls": [],
+  "partial_collection": false
 }
