@@ -29,7 +29,7 @@ Current [Bright Data Reddit docs](https://docs.brightdata.com/products/scrapers/
 
 ## Outputs and limitations
 
-The JSON report contains requested/returned/missing URL lists, an explicit `partial_collection` flag, per-post fields with provenance, venue totals, format counts, reply-theme counts, and source URLs. User-entered format and reply themes are labeled `curated`; subreddit and counters from Bright Data are labeled `collected`. Missing returned values are not silently filled from curated values. Empty or partial provider responses are reported as such. Inputs are user-curated, and counters depend on capture timing. Comparisons can be confounded by audience, timing, post content, moderation, and selection. No causal attribution, market-demand conclusion, or individual prospect inference is made.
+The JSON report contains requested/returned/missing URL lists, an explicit `partial_collection` flag, per-post fields with provenance, venue totals, format counts, reply-theme counts, and source URLs. User-entered format and reply themes are labeled `curated`; subreddit and counters from Bright Data are labeled `collected`. Missing returned values are not silently filled from curated values. Empty or partial provider responses are reported as such; duplicate returned records for one URL fail closed instead of silently overwriting. Inputs are user-curated, and counters depend on capture timing. Comparisons can be confounded by audience, timing, post content, moderation, and selection. No causal attribution, market-demand conclusion, or individual prospect inference is made.
 
 ## Differentiation
 

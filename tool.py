@@ -31,6 +31,7 @@ def build_report(requested_urls, records, curated_records=None):
     for record in records:
         url=record.get("url")
         if url not in requested: raise BrightDataError("unexpected_record","Collection returned a record without a matching requested URL")
+        if url in found: raise BrightDataError("duplicate_record","Collection returned more than one record for a requested URL")
         found[url]=record
     normalized=[]
     for url in requested_urls:

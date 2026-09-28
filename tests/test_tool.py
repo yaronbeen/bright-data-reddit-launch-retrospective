@@ -50,6 +50,13 @@ def test_report_lists_missing_requested_urls_and_partial_collection():
     empty=tool.build_report(requested,[])
     assert empty["post_count"]==0 and empty["missing_urls"]==requested and empty["partial_collection"] is True
 
+def test_build_report_rejects_duplicate_provider_records_instead_of_overwriting():
+    url="https://www.reddit.com/r/saas/comments/1/x/"
+    rows=[{"url":url,"num_comments":2},{"url":url,"num_comments":9}]
+    try: tool.build_report([url],rows)
+    except tool.BrightDataError as e: assert e.code=="duplicate_record"
+    else: assert False, "duplicate provider rows must not silently overwrite each other"
+
 def test_build_report_keeps_curated_fields_separate_from_collected_fields():
     url="https://www.reddit.com/r/saas/comments/1/x/"
     report=tool.build_report([url],[{"url":url,"community_name":"saas","num_comments":4,"num_upvotes":6}],{url:{"url":url,"format":"question","reply_themes":["pricing"]}})
